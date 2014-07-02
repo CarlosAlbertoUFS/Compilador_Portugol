@@ -1,0 +1,235 @@
+/*****************************************************************************************
+* Copyright (c) 2014, Carlos Alberto Santos de Souza (carlos.albertoufs@gmail.com) 
+*                     Samir Dantas Oliveira (samir.ufs@hotmail.com)
+All Rights Reserved.
+*
+******************************************************************************************/
+
+
+
+
+Helpers
+//define terminais
+	//Alfabeto da linguagem
+	ascii_char = [0x0 .. 0x7f] ; //toda a tabela ascii
+	letra = ['a' .. 'z'] ;
+	letra_m = ['A' .. 'Z'] ;
+	digito = ['0' .. '9'] ;
+	
+	//Pontuação
+	
+	chave_dir = '}';
+	chave_esq = '{';
+	cochete_dir = ']';
+	cochete_esq = '[';
+	barra_dir = '/';
+	barra_esq = '\';
+	parentese_dir = '(';
+	parentese_esq = ')';
+	estrela = '*';
+	sublinhado = '_' ;
+	virgula = ',';
+	menos = '-';
+	mais = '+';
+	ponto_virgula = ';';
+	dois_pontos = ':';
+	exponenciacao = '^';
+	resto = '%' ;
+	atrib = '<-' ;
+    maiorq = '>' ;
+	menorq = '<' ;
+	maior_igual = '>=' ;
+	menor_igual = '<=';
+	igual = '=';
+	diferente = '<>' ;
+	ponto = '.' ;
+	apostrof = ''';
+	
+//caracteres não imprimiveis
+	tab = 9 ;
+	cr = 13 ;
+	lf = 10 ;
+	branco = ' ';
+	
+	
+	States
+//Estados
+	normal,
+	comentario_aninhado;
+	
+	Tokens
+	
+//Pontuação
+	
+	chave_dir = '}';
+	chave_esq = '{';
+	cochete_dir = ']';
+	cochete_esq = '[';
+	barra_dir = '/';
+	barra_esq = '\';
+	parentese_dir = '(';
+	parentese_esq = ')';
+	estrela = '*';
+	sublinhado = '_' ;
+	virgula = ',';
+	menos = '-';
+	mais = '+';
+	ponto_virgula = ';';
+	dois_pontos = ':';
+	exponenciacao = '^';
+	resto = '%' ;
+	atrib = '<-' ;
+    maiorq = '>' ;
+	menorq = '<' ;
+	maior_igual = '>=' ;
+	menor_igual = '<=';
+	igual = '=';
+	diferente = '<>' ;
+	ponto = '.' ;
+	apostrof = ''';
+	
+//palavras reservadas
+	//programa
+	programa = 'programa' ;
+	inicio = 'inicio' ;
+	fim_ponto = 'fim'ponto ;
+	
+	//variáveis
+	var = 'var';
+	constante = 'constante';
+	inteiro = 'inteiro';
+	real = 'real';
+	logico = 'logico';
+	caractere = 'caractere';
+	
+	//condicional
+	se = 'se';
+	entao = 'entao';
+	fim_se = 'fim se';
+	senao = 'senao';
+	fim_senao = 'fim senao';
+	
+	//Multicondicional(swith,case,...)
+	avalie = 'avalie' ;
+	caso = 'caso' ;
+	padrao = 'padrao';
+	
+	//repetição para
+	para = 'para';
+	faca = 'faca' ;
+	ate = 'ate' ;
+	inicio_para = 'inicio para';
+	fim_para = 'fim para';
+	
+	//repetição enquanto
+	enquanto = 'enquanto';
+	inicio_enquanto = 'inicio enquanto';
+	fim_enquanto = 'fim enquanto';
+	
+	//Repetição repita
+	repita = 'repita';
+	inicio_repita = 'inicio repita';
+	fim_repita = 'fim repita';
+	
+	//entrada e saida
+	leia = 'leia' ;
+	escreva = 'escreva' ;
+	
+	//fluxo
+	passo = 'passo' ;
+	retorne = 'retorne';
+	interrompa = 'interrompa' ; //break em java
+	continue = 'continue';
+	
+	//logicos
+	nao = 'nao' ;
+	ou = 'ou' ;
+	xou = 'xou' ;
+	e = 'e' ;
+	verdade = 'verdade';
+	falso = 'falso';
+	
+	//listas
+	vetor = 'vetor' ;
+	
+		
+	//valores da linguagem
+	n_int = digito+;
+	n_real = digito virgula digito+;
+	l_caractere = apostrof [ascii_char - lf] apostrof;
+	
+    //comentários
+	comentario = barra_dir barra_dir [ascii_char - [cr + lf]]*;
+	
+	//comentatios aninhados, identificadores
+	{normal} brancos = (branco | cr lf | cr | lf | tab)+ ;
+	{normal} identificador = (letra |letra_m | sublinhado)+ (letra | letra_m | digito | sublinhado)*;
+	
+	{normal->comentario_aninhado, comentario_aninhado}
+	 comentario_inicio = barra_dir estrela;
+	{comentario_aninhado} comentario_fim = estrela barra_dir;
+	{comentario_aninhado} comentario_corpo = [ascii_char - [estrela + barra_dir]]*;
+
+	
+	Ignored Tokens
+//tokens ignorados
+	    comentario, brancos,comentario_corpo;
+		
+	Productions
+//Regras da gramatica
+	
+	exp_aritimetrica = 
+			{numero negativo} menos termo |
+			{adicao_subtracao} exp_aritimetrica soma termo |
+			{termo} termo ;
+			
+	soma = 
+			{adicao} mais |
+			{subtracao} menos;
+			
+	termo = 
+			{multiplicacao_divisao} termo mult fator | 
+			{fator} fator ;
+			
+	mult = 
+			{multiplicacao} estrela |
+			{divisao} barra_dir;
+			
+	fator = 
+			{numero_inteiro} n_int |
+			{numero_real} n_real |
+			{exp_parenteses} [esq]:parentese_esq exp_aritimetrica [dir]: parentese_dir;
+	
+	exp_logica = 
+			{expressao_logica} exp_logica simbolo termo_logico | 
+			{não_logico} nao termo |
+			{termo_logico} termo_logico;
+	
+	simbolo = 
+			{menor_que} menorq |
+			
+	
+	/*exp =	
+		{valor} valor |
+		{variavel} var |
+		{subtracao} menos exp |
+		{soma} exp mais exp |
+		{subtracao} exp menos exp |
+		{multiplicacao} exp estrela exp |
+		{divisao} exp barra_dir exp |
+		{expressao_logica} exp-logica;
+	
+	exp-logica =
+		{igual}	 exp igual exp |
+		{diferente} exp diferente exp |
+		{menor igual} exp menor_igual exp |
+		{maior igual} exp maior_igual exp |
+		{menor} exp menorq exp |
+		{maior} exp maiorq exp |
+		{negacao} nao exp-logica |
+		{conjuncao} exp-logica e exp-logica |
+		{uniao} exp-logica ou exp-logica |
+		{uniao exclusiva} exp-logica xou exp-logica;*/
+		
+		
+	
