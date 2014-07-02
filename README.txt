@@ -23,18 +23,27 @@ O objetivo é criar um compilador com base em uma linguagem portugol.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Testando o Lexico;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Para testar o Léxico. É necessário que você tenha o compilador da linguagem java 
+Para compilar este programa é necessário que você tenha o compilador da linguagem java 
 Eclipse instalado em seu pc.
 
--> Baixe a pasta "LFT" do repositorio: https://github.com/CarlosAlbertoUFS/Portugol 
+-> Baixe a pasta "LFT" do repositorio: https://github.com/CarlosAlbertoUFS/Portugol_Compilador 
 
 ->Abra o eclipse.
 
-->Importe a pasta que se encontra dentro da pasta "LFT" para o Eclipse, denominada
-"Compilador".
+->Importe a pasta "Compilador" para o Eclipse,
 
-->Na package "testes", compile a classe "TesteLexico" .
- 
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Para testar o lexico:
+
+-> Na package testes, compile a classe "testeLexico".
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Para testar o parser:
+
+-> Na package testes, compile a classe "testeParser". 
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 obs:
--A gramatica oficial se encontra dentro da pasta "LFT".
 -O arquivo texto usado na classe "TesteLexico", encontra-se dentro da pasta "Compilador".
