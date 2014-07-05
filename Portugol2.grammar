@@ -24,8 +24,8 @@ Helpers
 	cochete_esq = '[';
 	barra_dir = '/';
 	barra_esq = '\';
-	parentese_dir = '(';
-	parentese_esq = ')';
+	parentese_dir = ')';
+	parentese_esq = '(';
 	estrela = '*';
 	sublinhado = '_' ;
 	virgula = ',';
@@ -67,8 +67,8 @@ Helpers
 	cochete_esq = '[';
 	barra_dir = '/';
 	barra_esq = '\';
-	parentese_dir = '(';
-	parentese_esq = ')';
+	parentese_dir = ')';
+	parentese_esq = '(';
 	estrela = '*';
 	sublinhado = '_' ;
 	virgula = ',';
@@ -177,9 +177,22 @@ Helpers
 		
 	Productions
 //Regras da gramatica
+
+	declaracao =
+			{se_senao} se_bloco | 
+			{vazio};
+			
+		se_bloco =
+			{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
+			
+	  senao_bloco =
+			{senao_bloco} senao declaracao fim_senao | 
+			{vazio};
+				
 	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	exp_aritimetrica = 
-			{numero negativo} menos termo |
+			{numero_negativo} menos termo |
 			{adicao_subtracao} exp_aritimetrica soma termo |
 			{termo} termo ;
 			
@@ -196,20 +209,68 @@ Helpers
 			{divisao} barra_dir;
 			
 	fator = 
+			{exp_parenteses} parentese_esq exp_aritimetrica parentese_dir |
+			{numero} numero;	
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+		
+	exp_logica = 
+			{ou_logico} exp_logica ou exp_e | 
+			{exp_e} exp_e;
+
+	
+	exp_e =
+			{e_logico} exp_e e exp_nao |
+			{exp_nao} exp_nao;
+
+			
+	exp_nao = 
+			{nao_logico} nao termo_logico |
+			{termo_logico} termo_logico;
+
+			
+	termo_logico = 
+			{parenteses_logico} parentese_esq exp_logica parentese_dir |
+			{numero} numero;
+
+	numero = 
+			{numero_inteiro} n_int |
+			{numero_real} n_real;
+			
+					
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+/*			
+	exp_aritime
+	
+	 exp_igual =
+	        {igual_logico} exp_logica simbolo1 exp_nao |
+			{exp_menor} exp_nao;
+			 
+	 
+			
+	 simbolo1 = 
+			{igual} igual |
+			{diferente} diferente;
+			 
+	 exp_menor =
+			{menor_logico} exp_logica sombolo2 exp_nao;
+			
+	 simbolo2 = 
+			{menor_que} menorq |
+			{maior_que} maiorq |
+			{menor_igual} menor_igual |
+			{maior_igual} maior_igual;
+				
+	
+				
+	termo_logico =
+			{logico_parenteses} parentese_esq exp_logica parentese_dir | 
 			{numero_inteiro} n_int |
 			{numero_real} n_real |
-			{exp_parenteses} [esq]:parentese_esq exp_aritimetrica [dir]: parentese_dir;
-	
-	exp_logica = 
-			{expressao_logica} exp_logica simbolo termo_logico | 
-			{não_logico} nao termo |
-			{termo_logico} termo_logico;
-	
-	simbolo = 
-			{menor_que} menorq |
+			{caractere} caractere ;
 			
 	
-	/*exp =	
+	exp =	
 		{valor} valor |
 		{variavel} var |
 		{subtracao} menos exp |
