@@ -3,7 +3,7 @@ Portugol
 
 Compilador Portugol
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////////
-\\\\Curso Sisttemas de InformaÁ„o - 171                           /////
+\\\\Curso Sisttemas de InformaÔøΩÔøΩo - 171                           /////
 \\\\Disciplina Linguagens Formais e Tradutores UFS-SE Turma 2014-1/////
 \\\\Professor Kalil                                               /////
 \\\\                                                              /////
@@ -17,13 +17,13 @@ Compilador Portugol
 
 
 
-Este projeto foi feito para fins de avaliaÁ„o do aluno no curso.
-O objetivo È criar um compilador com base em uma linguagem portugol.
+Este projeto foi feito para fins de avaliaÔøΩÔøΩo do aluno no curso.
+O objetivo ÔøΩ criar um compilador com base em uma linguagem portugol.
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Testando o Lexico;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Para compilar este programa È necess·rio que vocÍ tenha o compilador da linguagem java 
+Para compilar este programa ÔøΩ necessÔøΩrio que vocÔøΩ tenha o compilador da linguagem java 
 Eclipse instalado em seu pc.
 
 -> Baixe a pasta "LFT" do repositorio: https://github.com/CarlosAlbertoUFS/Portugol_Compilador 
@@ -37,13 +37,22 @@ Eclipse instalado em seu pc.
 Para testar o lexico:
 
 -> Na package testes, compile a classe "testeLexico".
-
+   
+   - Esta classe l√™ os caracteres do "Texto.txt" eagrupa-os em tokens e os imprime na tela na ordem
+   em que v√£o sendo lidos.
+   
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Para testar o parser:
 
 -> Na package testes, compile a classe "testeParser". 
-
+    
+    - Esta classe recebe os tokens da classe "TesteLexico" e de acordo com a posi√ß√£o deles reconhece 
+    as produ√ß√µes queforam criadas na gramatica. Se algum token n√£o fiser partede alguma produ√ß√£o ou estiver 
+    fora da ordem da gramatica, ser√° impresso um erro. Se tudo estiver correto ele simplesmente terminar√° 
+    o programa sem imprimir erro algum.
+    
 //////////////////////////////////////////////////////////////////////////////////////////////
 obs:
--O arquivo texto usado na classe "TesteLexico", encontra-se dentro da pasta "Compilador".
+-O arquivo texto usado na classe "TesteLexico" e "TesteParser", encontra-se dentro da pasta "Compilador".
+
