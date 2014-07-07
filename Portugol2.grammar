@@ -193,20 +193,38 @@ Helpers
 
 	declaracao =
 	{se_senao} se_bloco |
-	{leia} leia parentese_dir exp_aritimetrica parentese_esq ponto_virgula |
-	{escreva} escreva parentese_dir l_caractere parentese_esq ponto_virgula |
-	{enquanto} enquanto parentese_dir exp_logica parentese_esq faca declaracao fim_enquanto ponto_virgula |
-	{repita} repita declaracao ate parentese_dir exp_logica parentese_esq fim_repita ponto_virgula |
-	//{para} para var de valor ate valor faca declaracao fim_para ponto_virgula |
-	//{para} para var de valor passo valor ate valor faca declaracao fim_para ponto_virgula |
+	{leia} ler |
+	{escreva} escvrever |
+	{enquanto_faca} enquanto |
+	{repita} repete |
+	//{para_faca} para_1 |
+	//{para_ate} para_2 |
 	{vazio};
 			
-		se_bloco =
-			{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
+	se_bloco =
+	{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
 			
-	  senao_bloco =
-			{senao_bloco} senao declaracao fim_senao | 
-			{vazio};
+	senao_bloco =
+	{senao_bloco} senao declaracao fim_senao | 
+	{vazio};
+			
+	ler =
+	leia parentese_dir exp_aritimetrica parentese_esq ponto_virgula ;
+	
+	escrever =
+	escreva parentese_dir l_caractere parentese_esq ponto_virgula ;
+	
+	enquanto =
+	enquanto parentese_dir exp_logica parentese_esq faca declaracao fim_enquanto ponto_virgula ;
+	
+	repete =
+	repita declaracao ate parentese_dir exp_logica parentese_esq fim_repita ponto_virgula ;
+	
+	para_1 =
+	para var de valor ate valor faca declaracao fim_para ponto_virgula ;
+	
+	para_2 =
+	para var de valor passo valor ate valor faca declaracao fim_para ponto_virgula ;
 				
 	//{avalie} avalie parentese_dir exp parentese_esq
 	
