@@ -5,46 +5,46 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANumeroInteiroFator extends PFator
+public final class AExpXouExpLogica extends PExpLogica
 {
-    private TNInt _nInt_;
+    private PExpXou _expXou_;
 
-    public ANumeroInteiroFator()
+    public AExpXouExpLogica()
     {
         // Constructor
     }
 
-    public ANumeroInteiroFator(
-        @SuppressWarnings("hiding") TNInt _nInt_)
+    public AExpXouExpLogica(
+        @SuppressWarnings("hiding") PExpXou _expXou_)
     {
         // Constructor
-        setNInt(_nInt_);
+        setExpXou(_expXou_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ANumeroInteiroFator(
-            cloneNode(this._nInt_));
+        return new AExpXouExpLogica(
+            cloneNode(this._expXou_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseANumeroInteiroFator(this);
+        ((Analysis) sw).caseAExpXouExpLogica(this);
     }
 
-    public TNInt getNInt()
+    public PExpXou getExpXou()
     {
-        return this._nInt_;
+        return this._expXou_;
     }
 
-    public void setNInt(TNInt node)
+    public void setExpXou(PExpXou node)
     {
-        if(this._nInt_ != null)
+        if(this._expXou_ != null)
         {
-            this._nInt_.parent(null);
+            this._expXou_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ANumeroInteiroFator extends PFator
             node.parent(this);
         }
 
-        this._nInt_ = node;
+        this._expXou_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nInt_);
+            + toString(this._expXou_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._nInt_ == child)
+        if(this._expXou_ == child)
         {
-            this._nInt_ = null;
+            this._expXou_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ANumeroInteiroFator extends PFator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._nInt_ == oldChild)
+        if(this._expXou_ == oldChild)
         {
-            setNInt((TNInt) newChild);
+            setExpXou((PExpXou) newChild);
             return;
         }
 

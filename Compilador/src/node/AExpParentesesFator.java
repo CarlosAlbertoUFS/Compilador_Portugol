@@ -7,9 +7,9 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AExpParentesesFator extends PFator
 {
-    private TParenteseEsq _esq_;
+    private TParenteseEsq _parenteseEsq_;
     private PExpAritimetrica _expAritimetrica_;
-    private TParenteseDir _dir_;
+    private TParenteseDir _parenteseDir_;
 
     public AExpParentesesFator()
     {
@@ -17,16 +17,16 @@ public final class AExpParentesesFator extends PFator
     }
 
     public AExpParentesesFator(
-        @SuppressWarnings("hiding") TParenteseEsq _esq_,
+        @SuppressWarnings("hiding") TParenteseEsq _parenteseEsq_,
         @SuppressWarnings("hiding") PExpAritimetrica _expAritimetrica_,
-        @SuppressWarnings("hiding") TParenteseDir _dir_)
+        @SuppressWarnings("hiding") TParenteseDir _parenteseDir_)
     {
         // Constructor
-        setEsq(_esq_);
+        setParenteseEsq(_parenteseEsq_);
 
         setExpAritimetrica(_expAritimetrica_);
 
-        setDir(_dir_);
+        setParenteseDir(_parenteseDir_);
 
     }
 
@@ -34,9 +34,9 @@ public final class AExpParentesesFator extends PFator
     public Object clone()
     {
         return new AExpParentesesFator(
-            cloneNode(this._esq_),
+            cloneNode(this._parenteseEsq_),
             cloneNode(this._expAritimetrica_),
-            cloneNode(this._dir_));
+            cloneNode(this._parenteseDir_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class AExpParentesesFator extends PFator
         ((Analysis) sw).caseAExpParentesesFator(this);
     }
 
-    public TParenteseEsq getEsq()
+    public TParenteseEsq getParenteseEsq()
     {
-        return this._esq_;
+        return this._parenteseEsq_;
     }
 
-    public void setEsq(TParenteseEsq node)
+    public void setParenteseEsq(TParenteseEsq node)
     {
-        if(this._esq_ != null)
+        if(this._parenteseEsq_ != null)
         {
-            this._esq_.parent(null);
+            this._parenteseEsq_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AExpParentesesFator extends PFator
             node.parent(this);
         }
 
-        this._esq_ = node;
+        this._parenteseEsq_ = node;
     }
 
     public PExpAritimetrica getExpAritimetrica()
@@ -95,16 +95,16 @@ public final class AExpParentesesFator extends PFator
         this._expAritimetrica_ = node;
     }
 
-    public TParenteseDir getDir()
+    public TParenteseDir getParenteseDir()
     {
-        return this._dir_;
+        return this._parenteseDir_;
     }
 
-    public void setDir(TParenteseDir node)
+    public void setParenteseDir(TParenteseDir node)
     {
-        if(this._dir_ != null)
+        if(this._parenteseDir_ != null)
         {
-            this._dir_.parent(null);
+            this._parenteseDir_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class AExpParentesesFator extends PFator
             node.parent(this);
         }
 
-        this._dir_ = node;
+        this._parenteseDir_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._esq_)
+            + toString(this._parenteseEsq_)
             + toString(this._expAritimetrica_)
-            + toString(this._dir_);
+            + toString(this._parenteseDir_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._esq_ == child)
+        if(this._parenteseEsq_ == child)
         {
-            this._esq_ = null;
+            this._parenteseEsq_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AExpParentesesFator extends PFator
             return;
         }
 
-        if(this._dir_ == child)
+        if(this._parenteseDir_ == child)
         {
-            this._dir_ = null;
+            this._parenteseDir_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AExpParentesesFator extends PFator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._esq_ == oldChild)
+        if(this._parenteseEsq_ == oldChild)
         {
-            setEsq((TParenteseEsq) newChild);
+            setParenteseEsq((TParenteseEsq) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AExpParentesesFator extends PFator
             return;
         }
 
-        if(this._dir_ == oldChild)
+        if(this._parenteseDir_ == oldChild)
         {
-            setDir((TParenteseDir) newChild);
+            setParenteseDir((TParenteseDir) newChild);
             return;
         }
 

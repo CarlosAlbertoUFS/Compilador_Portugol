@@ -5,46 +5,46 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class ANumeroRealFator extends PFator
+public final class AMenorQueSimbolo2 extends PSimbolo2
 {
-    private TNReal _nReal_;
+    private TMenorq _menorq_;
 
-    public ANumeroRealFator()
+    public AMenorQueSimbolo2()
     {
         // Constructor
     }
 
-    public ANumeroRealFator(
-        @SuppressWarnings("hiding") TNReal _nReal_)
+    public AMenorQueSimbolo2(
+        @SuppressWarnings("hiding") TMenorq _menorq_)
     {
         // Constructor
-        setNReal(_nReal_);
+        setMenorq(_menorq_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ANumeroRealFator(
-            cloneNode(this._nReal_));
+        return new AMenorQueSimbolo2(
+            cloneNode(this._menorq_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseANumeroRealFator(this);
+        ((Analysis) sw).caseAMenorQueSimbolo2(this);
     }
 
-    public TNReal getNReal()
+    public TMenorq getMenorq()
     {
-        return this._nReal_;
+        return this._menorq_;
     }
 
-    public void setNReal(TNReal node)
+    public void setMenorq(TMenorq node)
     {
-        if(this._nReal_ != null)
+        if(this._menorq_ != null)
         {
-            this._nReal_.parent(null);
+            this._menorq_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ANumeroRealFator extends PFator
             node.parent(this);
         }
 
-        this._nReal_ = node;
+        this._menorq_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nReal_);
+            + toString(this._menorq_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._nReal_ == child)
+        if(this._menorq_ == child)
         {
-            this._nReal_ = null;
+            this._menorq_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ANumeroRealFator extends PFator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._nReal_ == oldChild)
+        if(this._menorq_ == oldChild)
         {
-            setNReal((TNReal) newChild);
+            setMenorq((TMenorq) newChild);
             return;
         }
 

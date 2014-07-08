@@ -7,6 +7,12 @@ import node.*;
 
 class Tradutor extends DepthFirstAdapter
 {
+	@Override
+	public void outANumeroNegativoExpAritimetrica(
+			ANumeroNegativoExpAritimetrica node) {
+		// TODO Auto-generated method stub
+		System.out.println(node.getMenos());
+	}
 	
 	
 	@Override
@@ -43,10 +49,10 @@ class Tradutor extends DepthFirstAdapter
 	
 	@Override
 	public void caseAExpParentesesFator(AExpParentesesFator node) {
-		if(node.getDir().equals(")")){
-			System.out.println(node.getDir());
+		if(node.getParenteseDir().equals("(")){
+			System.out.println(node.getParenteseDir());
 		}else{
-			System.out.println(node.getEsq());
+			System.out.println(node.getParenteseEsq());
 		}
 	}
 	

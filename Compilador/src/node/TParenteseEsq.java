@@ -9,12 +9,12 @@ public final class TParenteseEsq extends Token
 {
     public TParenteseEsq()
     {
-        super.setText(")");
+        super.setText("(");
     }
 
     public TParenteseEsq(int line, int pos)
     {
-        super.setText(")");
+        super.setText("(");
         setLine(line);
         setPos(pos);
     }

@@ -9,6 +9,8 @@ import node.Start;
 import lexer.Lexer;
 import parser.Parser;
 
+
+
 public class TesteParser {
 
 	
@@ -27,7 +29,7 @@ public class TesteParser {
 			// Parse the input.
 		Start tree = p.parse();
 		// Apply the translation.
-		tree.apply(new Tradutor());
+		//tree.apply(new Tradutor());
 		}
 		catch(Exception e)
 		{

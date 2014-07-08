@@ -9,12 +9,12 @@ public final class TParenteseDir extends Token
 {
     public TParenteseDir()
     {
-        super.setText("(");
+        super.setText(")");
     }
 
     public TParenteseDir(int line, int pos)
     {
-        super.setText("(");
+        super.setText(")");
         setLine(line);
         setPos(pos);
     }

@@ -155,7 +155,7 @@ Helpers
 		
 	//valores da linguagem
 	n_int = digito+;
-	n_real = digito virgula digito+;
+	n_real = digito+ virgula digito+;
 	l_caractere = apostrof [ascii_char - lf] apostrof;
 	
     //comentários
@@ -177,58 +177,64 @@ Helpers
 		
 	Productions
 //Regras da gramatica
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///Layout do programa
+programa =
+		{cabecalho} T.programa identificador 
+						
+						declaracao
+						
+						comando
+					
+					fim_ponto ;
 
-	tipo =
-	{int} inteiro |
-	{real} real |
-	{carac} caractere ;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///declaraçao de variaveis e constantes. 
+//Ex: 'variavel' integer: numero [,var*]; / 'constante' constante  numero [,var*];  / 'vetor' integer: numero[1] ;
 
-	var =
-	tipo identificador atrib? ;
+declaracao =
+			{variaveis} P.tipo dois_pontos escorpo ponto_virgula |
+			{constantes} constante identificador valor ponto_virgula | 
+			{vazio};
 
-	valor =
-	{n_int} n_int |
-	{n_real} n_real |
-	{l_caractere} l_caractere ;
+tipo = 	
+			{inteiro} inteiro |
+			{real} real |
+			{caractere} caractere ;
 
-	declaracao =
-	{se_senao} se_bloco |
-	{leia} ler |
-	{escreva} escvrever |
-	{enquanto_faca} enquanto |
-	{repita} repete |
-	//{para_faca} para_1 |
-	//{para_ate} para_2 |
-	{vazio};
+escorpo = 
+			{lista_variaveis} escorpo virgula variavel |
+			{variavel} variavel;
+		
+variavel = 
+			{vetor} identificador cochete_esq n_int cochete_dir |
+			{variavel} identificador;
+
+
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Comandos
+
+			
+	comando =
+			{se_senao} comando se_bloco ponto_virgula |
+			{vazio};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SE..SENAO
+	
 			
 	se_bloco =
-	{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
+			{se_bloco} se parentese_esq  exp_logica parentese_dir entao comando senao_bloco fim_se;
 			
 	senao_bloco =
-	{senao_bloco} senao declaracao fim_senao | 
-	{vazio};
-			
-	ler =
-	leia parentese_dir exp_aritimetrica parentese_esq ponto_virgula ;
-	
-	escrever =
-	escreva parentese_dir l_caractere parentese_esq ponto_virgula ;
-	
-	enquanto =
-	enquanto parentese_dir exp_logica parentese_esq faca declaracao fim_enquanto ponto_virgula ;
-	
-	repete =
-	repita declaracao ate parentese_dir exp_logica parentese_esq fim_repita ponto_virgula ;
-	
-	para_1 =
-	para var de valor ate valor faca declaracao fim_para ponto_virgula ;
-	
-	para_2 =
-	para var de valor passo valor ate valor faca declaracao fim_para ponto_virgula ;
-				
-	//{avalie} avalie parentese_dir exp parentese_esq
+			{senao_bloco} senao comando fim_senao | 
+			{vazio};
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+/// expressões aritimetricas : +,-,*,/
+	
+	
 	exp_aritimetrica = 
 			{numero_negativo} menos termo |
 			{adicao_subtracao} exp_aritimetrica soma termo |
@@ -248,15 +254,19 @@ Helpers
 			
 	fator = 
 			{exp_parenteses} parentese_esq exp_aritimetrica parentese_dir |
-			{numero} numero;	
+			{elemento} elemento;	
 
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-		
-	exp_logica = 
-			{ou_logico} exp_logica ou exp_e | 
-			{exp_e} exp_e;
-
+//expressões logicas : nao,e,ou,xou
 	
+	exp_logica = 
+			{ou_logico} exp_logica ou exp_xou | 
+			{exp_xou} exp_xou ;
+
+	exp_xou =
+			{oux_logico} exp_xou xou exp_e |
+			{exp_e} exp_e;
+			
 	exp_e =
 			{e_logico} exp_e e exp_nao |
 			{exp_nao} exp_nao;
@@ -264,51 +274,55 @@ Helpers
 			
 	exp_nao = 
 			{nao_logico} nao termo_logico |
-			{termo_logico} termo_logico;
+			{termo_logico} termo_logico ;
 
 			
 	termo_logico = 
 			{parenteses_logico} parentese_esq exp_logica parentese_dir |
-			{numero} numero;
+			{parenteses_comparacao} exp_comparativa;
 
-	numero = 
-			{numero_inteiro} n_int |
-			{numero_real} n_real;
 			
 					
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
-/*			
-	exp_aritime
+//Expressões comparativas : >,<,>=,<=,=,<>
 	
-	 exp_igual =
-	        {igual_logico} exp_logica simbolo1 exp_nao |
-			{exp_menor} exp_nao;
-			 
-	 
+	
+	 exp_comparativa =
+	        {igual_diferente1} [esq]: elemento  P.simbolo1 [dir]: elemento |
+			{menor_maior} exp_menor_maior;
+			
 			
 	 simbolo1 = 
 			{igual} igual |
 			{diferente} diferente;
 			 
-	 exp_menor =
-			{menor_logico} exp_logica sombolo2 exp_nao;
+			 
+	 exp_menor_maior =
+			{menor_logico}  [esq]: elemento P.simbolo2 [dir]: elemento |
+			{elemento} elemento;
 			
 	 simbolo2 = 
 			{menor_que} menorq |
 			{maior_que} maiorq |
 			{menor_igual} menor_igual |
 			{maior_igual} maior_igual;
-				
-	
-				
-	termo_logico =
-			{logico_parenteses} parentese_esq exp_logica parentese_dir | 
-			{numero_inteiro} n_int |
-			{numero_real} n_real |
-			{caractere} caractere ;
+		
 			
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+///elementos representantes de valores	
+	elemento = 
+			{valor} valor |
+			{variaveis} variavel;
+
 	
-	exp =	
+	valor = 
+			{caractere} l_caractere |
+			{numero_inteiro} n_int |
+			{numero_real} n_real ;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+
+/*	exp =	
 		{valor} valor |
 		{variavel} var |
 		{subtracao} menos exp |
@@ -330,5 +344,5 @@ Helpers
 		{uniao} exp-logica ou exp-logica |
 		{uniao exclusiva} exp-logica xou exp-logica;*/
 		
-		//colocar ponto_virgula no 'se'
+		
 	

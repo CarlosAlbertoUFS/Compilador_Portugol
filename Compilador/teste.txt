@@ -1,1 +1,18 @@
-23 / 23 + 23 / 2
+
+
+programa teste
+
+ inteiro : eu;
+
+ se (eu = 12) entao
+ 
+ 
+ 
+ 	senao
+ 
+
+	fim senao 
+
+ fim se;
+ 
+fim.
