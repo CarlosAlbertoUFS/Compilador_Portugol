@@ -24,8 +24,8 @@ Helpers
 	cochete_esq = '[';
 	barra_dir = '/';
 	barra_esq = '\';
-	parentese_dir = ')';
-	parentese_esq = '(';
+	parentese_dir = '(';
+	parentese_esq = ')';
 	estrela = '*';
 	sublinhado = '_' ;
 	virgula = ',';
@@ -67,8 +67,8 @@ Helpers
 	cochete_esq = '[';
 	barra_dir = '/';
 	barra_esq = '\';
-	parentese_dir = ')';
-	parentese_esq = '(';
+	parentese_dir = '(';
+	parentese_esq = ')';
 	estrela = '*';
 	sublinhado = '_' ;
 	virgula = ',';
@@ -177,6 +177,7 @@ Helpers
 		
 	Productions
 //Regras da gramatica
+<<<<<<< HEAD
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///declaraçao de variaveis e constantes.
 declaracao = 
@@ -219,8 +220,11 @@ variavel =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 /// expressões aritimetricas : +,-,*,/
 	
+=======
+	
+>>>>>>> parent of d1c67cb... Gramatica Atualizada
 	exp_aritimetrica = 
-			{numero_negativo} menos termo |
+			{numero negativo} menos termo |
 			{adicao_subtracao} exp_aritimetrica soma termo |
 			{termo} termo ;
 			
@@ -237,6 +241,7 @@ variavel =
 			{divisao} barra_dir;
 			
 	fator = 
+<<<<<<< HEAD
 			{exp_parenteses} parentese_esq exp_aritimetrica parentese_dir |
 			{numero} numero;	
 
@@ -303,6 +308,22 @@ variavel =
 			
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 /*	exp =	
+=======
+			{numero_inteiro} n_int |
+			{numero_real} n_real |
+			{exp_parenteses} [esq]:parentese_esq exp_aritimetrica [dir]: parentese_dir;
+	
+	exp_logica = 
+			{expressao_logica} exp_logica simbolo termo_logico | 
+			{não_logico} nao termo |
+			{termo_logico} termo_logico;
+	
+	simbolo = 
+			{menor_que} menorq |
+			
+	
+	/*exp =	
+>>>>>>> parent of d1c67cb... Gramatica Atualizada
 		{valor} valor |
 		{variavel} var |
 		{subtracao} menos exp |
