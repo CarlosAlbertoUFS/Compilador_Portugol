@@ -178,17 +178,55 @@ Helpers
 	Productions
 //Regras da gramatica
 
+	tipo =
+	{int} inteiro |
+	{real} real |
+	{carac} caractere ;
+
+	var =
+	tipo identificador atrib? ;
+
+	valor =
+	{n_int} n_int |
+	{n_real} n_real |
+	{l_caractere} l_caractere ;
+
 	declaracao =
-			{se_senao} se_bloco | 
-			{vazio};
+	{se_senao} se_bloco |
+	{leia} ler |
+	{escreva} escvrever |
+	{enquanto_faca} enquanto |
+	{repita} repete |
+	//{para_faca} para_1 |
+	//{para_ate} para_2 |
+	{vazio};
 			
-		se_bloco =
-			{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
+	se_bloco =
+	{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
 			
-	  senao_bloco =
-			{senao_bloco} senao declaracao fim_senao | 
-			{vazio};
+	senao_bloco =
+	{senao_bloco} senao declaracao fim_senao | 
+	{vazio};
+			
+	ler =
+	leia parentese_dir exp_aritimetrica parentese_esq ponto_virgula ;
+	
+	escrever =
+	escreva parentese_dir l_caractere parentese_esq ponto_virgula ;
+	
+	enquanto =
+	enquanto parentese_dir exp_logica parentese_esq faca declaracao fim_enquanto ponto_virgula ;
+	
+	repete =
+	repita declaracao ate parentese_dir exp_logica parentese_esq fim_repita ponto_virgula ;
+	
+	para_1 =
+	para var de valor ate valor faca declaracao fim_para ponto_virgula ;
+	
+	para_2 =
+	para var de valor passo valor ate valor faca declaracao fim_para ponto_virgula ;
 				
+	//{avalie} avalie parentese_dir exp parentese_esq
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	exp_aritimetrica = 
@@ -292,5 +330,5 @@ Helpers
 		{uniao} exp-logica ou exp-logica |
 		{uniao exclusiva} exp-logica xou exp-logica;*/
 		
-		
+		//colocar ponto_virgula no 'se'
 	
