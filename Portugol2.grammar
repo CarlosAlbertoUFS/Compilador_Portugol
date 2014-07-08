@@ -177,20 +177,48 @@ Helpers
 		
 	Productions
 //Regras da gramatica
-
-	declaracao =
-			{se_senao} se_bloco | 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///declaraçao de variaveis e constantes.
+declaracao = 
+			{variaveis_atrib} declaracao tipo dois_pontos variaveis  atribuicao ponto_virgula |
+			{constantes} declaracao constante variavel valor |
 			{vazio};
 			
-		se_bloco =
+atribuicao = 
+			{atribuicao} atrib valor |
+			{vazio};
+	
+variaveis = 
+			{lista_variavel} variaveis variavel |
+			{variavel} variavel;
+			
+variavel = 
+			{nome} identificador |
+			{vetor} identificador cochete_esq n_int cochete_dir;
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Comandos
+
+			
+	comando =
+			{se_senao} se_bloco | 
+			{vazio};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SE..SENAO
+	
+			
+	se_bloco =
 			{se_bloco} se parentese_esq exp_logica parentese_dir entao declaracao senao_bloco fim_se;
 			
-	  senao_bloco =
+	senao_bloco =
 			{senao_bloco} senao declaracao fim_senao | 
 			{vazio};
 				
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+/// expressões aritimetricas : +,-,*,/
+	
 	exp_aritimetrica = 
 			{numero_negativo} menos termo |
 			{adicao_subtracao} exp_aritimetrica soma termo |
@@ -213,12 +241,16 @@ Helpers
 			{numero} numero;	
 
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-		
-	exp_logica = 
-			{ou_logico} exp_logica ou exp_e | 
-			{exp_e} exp_e;
-
+	//expressões logicas : nao,e,ou,xou
 	
+	exp_logica = 
+			{ou_logico} exp_logica ou exp_xou | 
+			{exp_xou} exp_xou ;
+
+	exp_xou =
+			{oux_logico} exp_xou xou exp_e |
+			{exp_e} exp_e;
+			
 	exp_e =
 			{e_logico} exp_e e exp_nao |
 			{exp_nao} exp_nao;
@@ -233,26 +265,23 @@ Helpers
 			{parenteses_logico} parentese_esq exp_logica parentese_dir |
 			{numero} numero;
 
-	numero = 
-			{numero_inteiro} n_int |
-			{numero_real} n_real;
 			
 					
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
-/*			
-	exp_aritime
+//Expressões comparativas : >,<,>=,<=,=,<>
 	
-	 exp_igual =
-	        {igual_logico} exp_logica simbolo1 exp_nao |
+	
+	 exp_comparativa =
+	        {igual_dif_logico} exp_logica simbolo1 exp_menor_maior |
 			{exp_menor} exp_nao;
-			 
-	 
+			
 			
 	 simbolo1 = 
 			{igual} igual |
 			{diferente} diferente;
 			 
-	 exp_menor =
+			 
+	 exp_menor_maior =
 			{menor_logico} exp_logica sombolo2 exp_nao;
 			
 	 simbolo2 = 
@@ -263,14 +292,17 @@ Helpers
 				
 	
 				
-	termo_logico =
+	termo_comparado =
 			{logico_parenteses} parentese_esq exp_logica parentese_dir | 
-			{numero_inteiro} n_int |
-			{numero_real} n_real |
+			{numero} valor |
 			{caractere} caractere ;
 			
-	
-	exp =	
+	valor = 
+			{numero_inteiro} n_int |
+			{numero_real} n_real;
+			
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+/*	exp =	
 		{valor} valor |
 		{variavel} var |
 		{subtracao} menos exp |
